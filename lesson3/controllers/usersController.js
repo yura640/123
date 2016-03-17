@@ -3,6 +3,7 @@
 var userModule = require('./../userModule');
 module.exports = {
     getUsers: function(request, response, next) {
+        response.setHeader('Content-Type', 'text/html; charset=utf-8');
         try {
             var users = userModule.getUser();
             response.write(JSON.stringify(users, null, 2));
@@ -20,7 +21,7 @@ module.exports = {
                 response.end();
             }catch(e){
                 response.statusCode = 400;
-                response.end('Bad request'+e);
+                response.end('Bad request');
             }
         })
     }
