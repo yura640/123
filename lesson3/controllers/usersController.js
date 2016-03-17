@@ -14,7 +14,14 @@ module.exports = {
 
     setUsers: function (request, response, next){
         request.on('data', function(chunk) {
-            userModule.setUser(chunk);
+            try{
+                userModule.setUser(chunk);
+                response.statusCode = 201;
+                response.end();
+            }catch(e){
+                response.statusCode = 400;
+                response.end('Bad request'+e);
+            }
         })
     }
 
