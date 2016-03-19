@@ -1,13 +1,6 @@
 "use strict";
 var userModule = require('./../userModule');
 
-function UserObject() {
-    this.name = undefined;
-    this.nick = undefined;
-    this.age = undefined;
-    this.description = undefined;
-    this.email = undefined
-}
 module.exports = {
 
     getUsers: function(request, response, next) {

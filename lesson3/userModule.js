@@ -11,6 +11,13 @@ function UserObject() {
     this.description = undefined;
     this.email = undefined
 }
+function checkNick(userNick){
+    for (var i=0; i < userArray.length; i++) {
+        if (userArray[i].nick == userNick) {
+             userArray.splice(i,1);
+        }
+    }
+}
 module.exports = {
 
     getUser: function (request, response, next) {
@@ -25,12 +32,15 @@ module.exports = {
                 if (key.toLowerCase() == "name" && validator.isLength(value, {min: 1, max: 10})) {
                     curentUser.name = value;
 
-                    } else if(key.toLowerCase() == undefined){throw err}
+                    } else if(key.toLowerCase() == undefined){
+                        throw err}
 
                 if (key.toLowerCase() == "nick" && validator.isLength(value, {min: 1, max: 10})) {
                     curentUser.nick = value;
+                    checkNick(value);
 
-                    } else if(key.toLowerCase() == undefined){throw err}
+                    } else if(key.toLowerCase() == undefined){
+                        throw err}
 
                 if (key.toLowerCase() == "age" && validator.isInt(value.toString(), {min: 1, max: 10})) {
                     curentUser.age = value;
@@ -50,6 +60,7 @@ module.exports = {
         userArray.push(curentUser);
 
      }
+
 };
 
 
